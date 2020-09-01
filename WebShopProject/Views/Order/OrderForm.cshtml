@@ -1,0 +1,89 @@
+﻿@model WebShopProject.ViewModels.OrderViewModel
+@{
+    ViewBag.Title = "OrderForm";
+
+}
+
+<h2>New Order</h2>
+
+@using (Html.BeginForm("Save", "Order"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Order.Amount)
+        @Html.TextBoxFor(m => m.Order.Amount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.Amount)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductId)
+        @Html.ListBoxFor(m => m.ProductId, Model.Products, new { @class = "form-control", size = 5 })
+        @Html.ValidationMessageFor(m => m.Order.Products)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Order.OrderDate)
+        @Html.TextBoxFor(m => m.Order.OrderDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.OrderDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Order.ArrivalDate)
+        @Html.TextBoxFor(m => m.Order.ArrivalDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.ArrivalDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Order.Country)
+        @Html.TextBoxFor(m => m.Order.Country, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.Country)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Order.City)
+        @Html.TextBoxFor(m => m.Order.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.City)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Order.OrderAdress)
+        @Html.TextBoxFor(m => m.Order.OrderAdress, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.OrderAdress)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Order.ZipCode)
+        @Html.TextBoxFor(m => m.Order.ZipCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Order.ZipCode)
+    </div>
+
+
+    @Html.HiddenFor(m => m.Order.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script>
+            getAmount();
+
+             function getAmount() {
+                 $("#ProductId").change(function (e) {
+
+
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Order/GetProduct?Productid=' + $("#ProductId").val(),
+                        dataType: 'JSON',
+                        success: function (data) {
+                            console.log(data)
+                            $("#Amount").text++
+
+                        }
+                    });
+                });
+            }
+
+
+        </script>*@
+}

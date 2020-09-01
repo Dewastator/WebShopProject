@@ -1,0 +1,58 @@
+﻿@model WebShopProject.ViewModels.NewProductViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Product</h2>
+
+@using (Html.BeginForm("Save", "Product"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.Name)
+        @Html.TextBoxFor(m => m.Product.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Product.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.Price)
+        @Html.TextBoxFor(m => m.Product.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Product.Price)
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Product.Status) Status
+        </label>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductSizeId)
+        @Html.DropDownListFor(m => m.Product.ProductSizeId, new
+
+        SelectList(Model.ProductSizes, "Id", "Size"), "Select Product Size", new
+        {
+            @class = "form-control"
+             })
+
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Product.ProductTypeId)
+        @Html.DropDownListFor(m => m.Product.ProductTypeId, new
+
+        SelectList(Model.ProductTypes, "Id", "Type"), "Select Product Type", new
+        {
+            @class = "form-control"
+             })
+
+
+    </div>
+
+    @Html.HiddenFor(m => m.Product.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
